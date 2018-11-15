@@ -1,5 +1,9 @@
 package com.juzix.word.util;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 /**
@@ -16,7 +20,10 @@ public class SensitiveWordUtil {
      */
     public static final int MinMatchTYpe = 1;
     public static final int MaxMatchType = 2;
-
+    /**
+     * 编码
+     */
+    public static final String ENCODING = "utf-8";
     /**
      * 敏感词集合
      */
@@ -61,7 +68,9 @@ public class SensitiveWordUtil {
                     newWordMap = new HashMap<>();
                     //不是最后一个
                     newWordMap.put("isEnd", "0");
+                    // 增量,nowMap一直代表最里层的那个对象，通过反复重置进行嵌套
                     nowMap.put(keyChar, newWordMap);
+                    // 重置
                     nowMap = newWordMap;
                 }
 
@@ -249,14 +258,50 @@ public class SensitiveWordUtil {
                         break;
                     }
                 }
-            } else {//不存在，直接返回
+            } else {
+                //不存在，直接返回
                 break;
             }
         }
-        if (matchFlag < 2 || !flag) {//长度必须大于等于1，为词
+        //长度必须大于等于1，为词
+        if (matchFlag < 2 || !flag) {
             matchFlag = 0;
         }
         return matchFlag;
+    }
+
+    /**
+     * 加载敏感词库
+     *
+     * @return
+     * @throws Exception
+     */
+    public static Set<String> loadSensitiveWordBank(String filePath) throws Exception {
+        Set<String> set = null;
+        //读取文件
+        File file = new File(filePath);
+        InputStreamReader read = new InputStreamReader(new FileInputStream(file), ENCODING);
+        try {
+            //文件流是否存在
+            if (file.isFile() && file.exists()) {
+                set = new HashSet<>();
+                BufferedReader bufferedReader = new BufferedReader(read);
+                String txt = null;
+                //读取文件，将文件内容放入到set中
+                while ((txt = bufferedReader.readLine()) != null) {
+                    set.add(txt);
+                }
+            } else {
+                //不存在抛出异常信息
+                throw new Exception("敏感词库文件不存在");
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            //关闭文件流
+            read.close();
+        }
+        return set;
     }
 
     public static void main(String[] args) {
@@ -272,6 +317,7 @@ public class SensitiveWordUtil {
         SensitiveWordUtil.init(sensitiveWordSet);
 
         System.out.println("敏感词的数量：" + SensitiveWordUtil.sensitiveWordMap.size());
+        System.out.println("敏感词：" + SensitiveWordUtil.sensitiveWordMap);
         String string = "太多的伤感情怀也许只局限于饲养基地 荧幕中的情节。"
                 + "然后我们的扮演的角色就是跟随着主人公的喜红客联盟 怒哀乐而过于牵强的把自己的情感也附加于银幕情节中，然后感动就流泪，"
                 + "难过就躺在某一个人的怀里尽情的阐述心扉或者手机卡复制器一个贱人一杯红酒一部电影在夜 深人静的晚上，关上电话静静的发呆着。";
