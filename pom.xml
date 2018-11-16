@@ -44,9 +44,8 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.kie.modules</groupId>
-            <artifactId>org-apache-commons-lang3</artifactId>
-            <version>6.1.0.Beta4</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
 
