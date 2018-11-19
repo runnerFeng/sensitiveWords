@@ -67,7 +67,7 @@ public class ValidatedExceptionHandler {
             errMsg = StringUtils.stripEnd(builder.toString(), ";");
             return ResultWrapper.buildError(-1, errMsg);
         }
-            return ResultWrapper.buildSuccess();
+        return ResultWrapper.buildSuccess();
     }
 
     /**
@@ -84,22 +84,6 @@ public class ValidatedExceptionHandler {
         sb.append("值:").append(c.getValue());
         return ResultWrapper.buildError(-1, sb.toString());
     }
-
-//    @ExceptionHandler(value = {DuplicateKeyException.class})
-//    public Object DuplicateKeyException(DuplicateKeyException c) {
-//        return ResultGenerator.genFail(ErrorCodeEnum.RET_REPEATE_10004.getCode(), ErrorCodeEnum.RET_REPEATE_10004.getName(), c.getCause().getMessage().split(" ")[2]);
-//    }
-//
-//    @ExceptionHandler(value = {HttpMessageNotReadableException.class})
-//    public Object HttpMessageNotReadableException(HttpMessageNotReadableException c) {
-//        return ResultGenerator.genFailByCodeAndMessage(ErrorCodeEnum.RET_PARAM_PARSE_100011);
-//    }
-//
-//    @ExceptionHandler(value = {JSONException.class})
-//    public Object JSONException(JSONException c) {
-//        String data = c.getMessage().split(":").length > 1 ? c.getMessage().split(":")[1].trim() : "" + ":" + (c.getCause() != null ? c.getCause().getMessage().split(":")[1].trim() : "");
-//        return ResultGenerator.genFailByCodeAndMessageAndData(ErrorCodeEnum.RET_NUMBER_FORMAT_100010, data);
-//    }
 
     @ExceptionHandler(value = {Exception.class})
     public Object methodException(Exception c) {

@@ -26,20 +26,20 @@ public class SensitiveWordFilterController {
     @Resource
     private SensitiveWordConfig config;
 
-
     @RequestMapping(value = "sensitiveWordFilter", method = RequestMethod.POST)
     public Object sensitiveWordFilter(@RequestBody @Validated SensitiveWordRequestDto dto) {
         // 加载敏感词库
         Set<String> set;
         try {
-            set = SensitiveWordUtil.loadSensitiveWordBank(config.getFilePath());
+//            set = SensitiveWordUtil.loadSensitiveWordByFilePath(config.getFilePath());
+            set = SensitiveWordUtil.loadSensitiveWordByFileName(config.getFileName());
         } catch (Exception e) {
             return ResultWrapper.buildError(-1, "敏感词库不存在！");
         }
         // 初始化敏感词库
         SensitiveWordUtil.init(set);
         String filterString = SensitiveWordUtil.replaceSensitiveWord(dto.getTxt(), config.getReplaceText());
-        return  ResultWrapper.buildSuccess(filterString);
+        return ResultWrapper.buildSuccess(filterString);
     }
 
 }

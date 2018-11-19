@@ -28,15 +28,15 @@ public class ResultWrapper<T> {
         this.data = data;
     }
 
-    public static ResultWrapper buildSuccess(){
+    public static ResultWrapper buildSuccess() {
         return new ResultWrapper(CODE_OK, MESSAGE);
     }
 
-    public static <T> ResultWrapper buildSuccess(T data){
-        return new ResultWrapper(CODE_OK,MESSAGE,data);
+    public static <T> ResultWrapper buildSuccess(T data) {
+        return new ResultWrapper(CODE_OK, MESSAGE, data);
     }
 
-    public static ResultWrapper buildError(int code,String message){
-        return new ResultWrapper(code,message);
+    public static ResultWrapper buildError(int code, String message) {
+        return new ResultWrapper(code, message);
     }
 }

@@ -1,9 +1,6 @@
 package com.juzix.word.util;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -276,7 +273,7 @@ public class SensitiveWordUtil {
      * @return
      * @throws Exception
      */
-    public static Set<String> loadSensitiveWordBank(String filePath) throws Exception {
+    public static Set<String> loadSensitiveWordByFilePath(String filePath) throws Exception {
         Set<String> set = null;
         //读取文件
         File file = new File(filePath);
@@ -303,6 +300,34 @@ public class SensitiveWordUtil {
         }
         return set;
     }
+
+    /**
+     * 加载敏感词库
+     *
+     * @return
+     * @throws Exception
+     */
+    public static Set<String> loadSensitiveWordByFileName(String fileName) throws IOException {
+        Set<String> set = null;
+        InputStream inputStream = SensitiveWordUtil.class.getClassLoader().getResourceAsStream(fileName);
+        try {
+            if (null != inputStream) {
+                set = new HashSet<>();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String str = null;
+                while ((str = bufferedReader.readLine()) != null) {
+                    set.add(str);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            inputStream.close();
+        }
+        return set;
+    }
+
 
     public static void main(String[] args) {
         Set<String> sensitiveWordSet = new HashSet<>();

@@ -13,6 +13,17 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "sensitive")
 @Component
 public class SensitiveWordConfig {
+    /**
+     * 文件路径 eg:/home/juzix/file
+     */
     private String filePath;
+    /**
+     * 文件名称 eg:sensitiveWord.txt
+     */
+    private String fileName;
+    /**
+     * 替换字符 eg:*
+     */
     private String replaceText;
+
 }
