@@ -77,3 +77,51 @@ ___
 # 图片(参数式行内式)
 
 ###行内式
+![我是图片](file:///C:\Users\juzhen\Pictures\Saved Pictures\default.jpeg)
+
+###参数式
+[我是图片]: file:///C:\Users\juzhen\Desktop\15198775305613813.jpg
+参数式图片![我是图片]
+
+
+#代码框
+
+###第一种，单行用`
+
+`
+public static void main(String args[]){}
+` 
+
+###第二种，多行用```
+``` 可以写注释
+public static void main(String args[]){}
+```
+
+#表格(冒号在左边左对齐，右边右对齐，两边都有中间对齐)
+
+name | age | sex
+:---:|:---:|:---:
+tony|lifeng|jinx
+beijing|shangahi|shenzhen
+
+name | age | sex
+----- | -----  | ---
+tony|lifeng|jinx
+beijing|shangahi|shenzhen
+
+
+
+#强调
+
+*字体倾斜*
+_字体倾斜_
+**字体加粗**
+__字体加粗__
+
+
+
+#删除线
+
+~~删除~~
+
+
