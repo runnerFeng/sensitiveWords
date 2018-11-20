@@ -80,7 +80,7 @@ ___
 ![我是图片](https://github.com/runnerFeng/sensitiveWords/blob/master/src/main/resources/image/2.jpeg)
 
 ### 参数式
-[我是图片]: https://github.com/runnerFeng/sensitiveWords/blob/master/src/main/resources/image/1.jpg
+[我是图片]:https://github.com/runnerFeng/sensitiveWords/blob/master/src/main/resources/image/1.jpg
 参数式图片![我是图片]
 
 
