@@ -77,10 +77,10 @@ ___
 # 图片(参数式行内式)
 
 ###行内式
-![我是图片](file:///C:\Users\juzhen\Pictures\Saved Pictures\default.jpeg)
+![我是图片](https://github.com/runnerFeng/sensitiveWords/blob/master/src/main/resources/image/2.jpeg)
 
 ###参数式
-[我是图片]: file:///C:\Users\juzhen\Desktop\15198775305613813.jpg
+[我是图片]: https://github.com/runnerFeng/sensitiveWords/blob/master/src/main/resources/image/1.jpg
 参数式图片![我是图片]
 
 
