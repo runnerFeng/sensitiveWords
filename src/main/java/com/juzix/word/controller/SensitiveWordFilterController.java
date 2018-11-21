@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.Set;
 
 /**
@@ -38,8 +39,13 @@ public class SensitiveWordFilterController {
         }
         // 初始化敏感词库
         SensitiveWordUtil.init(set);
-        String filterString = SensitiveWordUtil.replaceSensitiveWord(dto.getTxt(), config.getReplaceText());
+        String filterString = SensitiveWordUtil.replaceSensitiveWord(dto.getTxt().replaceAll(" +",""), config.getReplaceText());
         return ResultWrapper.buildSuccess(filterString);
+    }
+
+    public static void main(String[] args) throws IOException {
+        Set<String> set = SensitiveWordUtil.loadSensitiveWordByFileName("sensitiveWord.txt");
+
     }
 
 }

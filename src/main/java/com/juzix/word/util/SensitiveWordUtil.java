@@ -1,5 +1,7 @@
 package com.juzix.word.util;
 
+import lombok.Cleanup;
+
 import java.io.*;
 import java.util.*;
 
@@ -277,26 +279,19 @@ public class SensitiveWordUtil {
         Set<String> set = null;
         //读取文件
         File file = new File(filePath);
-        InputStreamReader read = new InputStreamReader(new FileInputStream(file), ENCODING);
-        try {
-            //文件流是否存在
-            if (file.isFile() && file.exists()) {
-                set = new HashSet<>();
-                BufferedReader bufferedReader = new BufferedReader(read);
-                String txt = null;
-                //读取文件，将文件内容放入到set中
-                while ((txt = bufferedReader.readLine()) != null) {
-                    set.add(txt);
-                }
-            } else {
-                //不存在抛出异常信息
-                throw new Exception("敏感词库文件不存在");
+        @Cleanup InputStreamReader read = new InputStreamReader(new FileInputStream(file), ENCODING);
+        //文件流是否存在
+        if (file.isFile() && file.exists()) {
+            set = new HashSet<>();
+            BufferedReader bufferedReader = new BufferedReader(read);
+            String txt = null;
+            //读取文件，将文件内容放入到set中
+            while ((txt = bufferedReader.readLine()) != null) {
+                set.add(txt);
             }
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            //关闭文件流
-            read.close();
+        } else {
+            //不存在抛出异常信息
+            throw new Exception("敏感词库文件不存在");
         }
         return set;
     }
@@ -309,21 +304,15 @@ public class SensitiveWordUtil {
      */
     public static Set<String> loadSensitiveWordByFileName(String fileName) throws IOException {
         Set<String> set = null;
-        InputStream inputStream = SensitiveWordUtil.class.getClassLoader().getResourceAsStream(fileName);
-        try {
-            if (null != inputStream) {
-                set = new HashSet<>();
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String str = null;
-                while ((str = bufferedReader.readLine()) != null) {
-                    set.add(str);
-                }
+        @Cleanup InputStream inputStream = SensitiveWordUtil.class.getClassLoader().getResourceAsStream(fileName);
+        if (null != inputStream) {
+            set = new HashSet<>();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String str = null;
+            while ((str = bufferedReader.readLine()) != null) {
+                set.add(str);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            inputStream.close();
         }
         return set;
     }
