@@ -94,7 +94,8 @@ public static void main(String args[]){}
 
 ### 第二种，多行用```
 ``` 可以写注释
-public static void main(String args[]){}
+public static void main(String args[]){
+}
 ```
 
 # 表格(冒号在左边左对齐，右边右对齐，两边都有中间对齐)
